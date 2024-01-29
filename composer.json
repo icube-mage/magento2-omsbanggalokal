@@ -1,0 +1,29 @@
+{
+    "name": "icube-mage/magento2-omsbanggalokal",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "trisnarisnandar",
+            "email": "trisna.risnandar@sirclo.com"
+        }
+    ],
+    "description": "Custom Module OMS Bangga Lokal",
+    "homepage": "https://github.com/icube-mage/magento2-omsbanggalokal/tree/develop",
+    "keywords": [
+        "magento",
+        "magento2"
+    ],
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "replace": {
+        "icube-mage/magento2-omsbanggalokal": "self.version"
+    },
+    "autoload": {
+        "files": [],
+        "psr-4": {}
+    }
+}
