@@ -31,12 +31,14 @@
     },
     "autoload": {
         "files": [
-            "src/banggalokal-googleads/registration.php"
+            "src/banggalokal-googleads/registration.php",
+            "src/banggalokal-metaads/registration.php"
         ],
         "psr-4": {
             "Google\\Ads\\GoogleAds\\": "src/googleads-lib/src",
             "GPBMetadata\\Google\\Ads\\GoogleAds\\": "src/googleads-lib/metadata",
-            "Banggalokal\\Googleads\\": "src/banggalokal-googleads"
+            "Banggalokal\\Googleads\\": "src/banggalokal-googleads",
+            "Banggalokal\\Metaads\\": "src/banggalokal-metaads"
         }
     }
 }
