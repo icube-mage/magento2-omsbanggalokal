@@ -8,6 +8,13 @@
         }
     ],
     "description": "Custom Module OMS Bangga Lokal",
+    "require": {
+        "php": ">=8.0",
+        "google/gax": "^1.19.1",
+        "grpc/grpc": "^1.36.0",
+        "google/protobuf": "^3.21.5",
+        "monolog/monolog": "^1.26 || ^2.0 || ^3.0"
+    },
     "homepage": "https://github.com/icube-mage/magento2-omsbanggalokal/tree/develop",
     "keywords": [
         "magento",
@@ -23,7 +30,13 @@
         "icube-mage/magento2-omsbanggalokal": "self.version"
     },
     "autoload": {
-        "files": [],
-        "psr-4": {}
+        "files": [
+            "src/banggalokal-googleads/registration.php"
+        ],
+        "psr-4": {
+            "Google\\Ads\\GoogleAds\\": "src/google-ads-php",
+            "GPBMetadata\\Google\\Ads\\GoogleAds\\": "metadata/google-ads-php",
+            "Banggalokal\\Googleads\\": "src/banggalokal-googleads"
+        }
     }
 }

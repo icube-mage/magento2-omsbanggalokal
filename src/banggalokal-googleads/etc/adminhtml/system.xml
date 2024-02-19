@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="swiftoms" sortOrder="9999998" translate="label">
+            <label>Swift OMS</label>
+        </tab>
+        <section id="banggalokal_googleads" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Google Ads Integration</label>
+            <tab>swiftoms</tab>
+            <resource>Banggalokal_Googleads::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Google Ads</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="developer_token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Developer Token</label>
+                </field>
+                <field id="manager_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Google Ads Manager ID</label>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                </field>
+                <field id="client_secret" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client Secret</label>
+                </field>
+                <field id="refresh_token" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Refresh Token</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

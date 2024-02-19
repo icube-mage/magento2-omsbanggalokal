@@ -1,0 +1,4 @@
+type Query {
+    getGoogleAdsConfiguration: [Configuration] @resolver(class: "\\Banggalokal\\Googleads\\Model\\Resolver\\Configuration\\GetGoogleAdsConfiguration") @doc(description: "Get Finance Configuration")
+    generateRefreshToken: String @resolver(class: "\\Banggalokal\\Googleads\\Model\\Resolver\\GenerateRefreshToken") @doc(description: "Generate Refresh Token Url")
+}
