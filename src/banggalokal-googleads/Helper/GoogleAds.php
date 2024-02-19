@@ -5,6 +5,10 @@ namespace Banggalokal\Googleads\Helper;
 use Magento\Store\Model\ScopeInterface;
 use Google\Auth\CredentialsLoader;
 use Google\Auth\OAuth2;
+use Google\Ads\GoogleAds\Lib\V15\GoogleAdsClient;
+use Google\Ads\GoogleAds\Lib\V15\GoogleAdsClientBuilder;
+use Google\Ads\GoogleAds\Lib\Configuration;
+use Google\Ads\GoogleAds\Lib\OAuth2TokenBuilder;
 use Magento\Config\Model\ResourceModel\Config as ConfigResource;
 use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\StoreManagerInterface;
@@ -159,5 +163,29 @@ class GoogleAds extends \Magento\Framework\App\Helper\AbstractHelper
             ]
         );
         return $oauth2;
+    }
+
+    public function getGoogleAdsClient() : GoogleAdsClient
+    {
+        $configuration = new Configuration([
+            'OAUTH2' => [
+                'clientId' => $this->getClientId(),
+                'clientSecret' => $this->getClientSecret(),
+                'refreshToken' => $this->getRefreshToken()
+            ],
+            'GOOGLE_ADS' => [
+                'developerToken' => $this->getDeveloperToken(),
+                'loginCustomerId' => $this->getManagerId()
+            ]
+        ]);
+        $oAuth2Credential = (new OAuth2TokenBuilder())
+            ->from($configuration)->build();
+        $googleAdsClient = (new GoogleAdsClientBuilder())
+            ->from($configuration)
+            ->withOAuth2Credential($oAuth2Credential)
+            ->usingGapicV2Source(true)
+            ->build();
+        
+        return $googleAdsClient;
     }
 }
