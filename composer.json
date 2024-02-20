@@ -34,8 +34,8 @@
             "src/banggalokal-googleads/registration.php"
         ],
         "psr-4": {
-            "Google\\Ads\\GoogleAds\\": "src/banggalokal-googleads/lib/src",
-            "GPBMetadata\\Google\\Ads\\GoogleAds\\": "src/banggalokal-googleads/lib/metadata",
+            "Google\\Ads\\GoogleAds\\": "src/googleads-lib/src",
+            "GPBMetadata\\Google\\Ads\\GoogleAds\\": "src/googleads-lib/metadata",
             "Banggalokal\\Googleads\\": "src/banggalokal-googleads"
         }
     }

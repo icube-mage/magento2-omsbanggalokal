@@ -42,12 +42,12 @@ class GenerateRefreshToken implements ResolverInterface
         ?array $value = null,
         ?array $args = null
     ) {
-        // /** @var ContextInterface $context */
-        // if (false === $context->getExtensionAttributes()->getIsCustomer()) {
-        //     throw new GraphQlAuthorizationException(
-        //         __('The request is allowed for logged in.')
-        //     );
-        // }
+        /** @var ContextInterface $context */
+        if (false === $context->getExtensionAttributes()->getIsCustomer()) {
+            throw new GraphQlAuthorizationException(
+                __('The request is allowed for logged in.')
+            );
+        }
         if (!$this->googleAdsHelper->getIsEnabled()) {
             throw new GraphQlAuthorizationException(
                 __('Enable Google Ads Integration to generate refresh token.')
