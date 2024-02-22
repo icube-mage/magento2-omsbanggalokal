@@ -1,0 +1,10 @@
+type StoreConfig {
+    getMetaAdsConfig: MetaAdsConfigOutput @resolver(class: "Banggalokal\\Metaads\\Model\\Resolver\\Configuration\\GetMetaAdsConfig") @doc(description: "Get Meta Ads Configuration")
+}
+
+type MetaAdsConfigOutput @doc(description: "MetaAds Configuration.") {
+    enable: Int @doc(description: "Value metaads_section/general/enable")
+    apps_id: String @doc(description: "Value metaads_section/general/apps_id")
+    secret_id: String @doc(description: "Value metaads_section/general/secret_id")
+    access_token: String @doc(description: "Value metaads_section/general/access_token")
+}
