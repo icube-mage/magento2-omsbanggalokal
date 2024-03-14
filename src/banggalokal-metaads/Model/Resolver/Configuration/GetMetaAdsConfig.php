@@ -8,13 +8,43 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Swiftoms\General\Model\Resolver\Configuration\ConfigGenerator;
+use Magento\Config\Model\Config\Source\Yesno;
+use Banggalokal\Metaads\Helper\MetaAds;
 
 class GetMetaAdsConfig implements ResolverInterface
 {
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $_scopeConfig;
+ 
+    /**
+     * @var ConfigGenerator
+     */
+    protected $configGenerator;
+
+    /**
+     * @var Yesno
+     */
+    protected $yesnoOptionSource;
+
+    /**
+     * @var MetaAds
+     */
+    protected $metaAdsHelper;
+
+
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        ConfigGenerator $configGenerator,
+        Yesno $yesnoOptionSource,
+        MetaAds $metaAdsHelper
     ) {
         $this->_scopeConfig = $scopeConfig;
+        $this->configGenerator = $configGenerator;
+        $this->yesnoOptionSource = $yesnoOptionSource;
+        $this->metaAdsHelper = $metaAdsHelper;
     }
 
     /**
@@ -27,19 +57,57 @@ class GetMetaAdsConfig implements ResolverInterface
         array $value = null,
         array $args = null
     ) {
-        
-        $result["enable"] = $this->getConfigValue('metaads_section/general/enable');
-        $result["apps_id"] = $this->getConfigValue('metaads_section/general/apps_id');
-        $result["secret_id"] = $this->getConfigValue('metaads_section/general/secret_id');
-        $result["access_token"] = $this->getConfigValue('metaads_section/general/access_token');
 
-        return $result;
+        /** @var ContextInterface $context */
+        if (false === $context->getExtensionAttributes()->getIsCustomer()) {
+            throw new GraphQlAuthorizationException(
+                __('The request is allowed for logged in.')
+            );
+        }
+
+        $configs = $this->getConfiguration();
+        $configs = $this->configGenerator->formatConfig($configs);
+
+        return $configs;
     }
 
-    /**
-     * Get config value based on store scope
-     */
-    private function getConfigValue($field){
-        return $this->_scopeConfig->getValue($field, ScopeInterface::SCOPE_STORE);
+    public function getConfiguration()
+    {
+        $config[] = $this->getGroupGeneralConfig();
+
+        return $config;
     }
+
+    public function getGroupGeneralConfig()
+    {
+        $group = [
+            'label' => __('General'),
+            'fields' => [
+                0 => [
+                    'id' => MetaAds::XML_PATH_META_ADS_ENABLED,
+                    'type' => 'select',
+                    'options' => $this->yesnoOptionSource->toOptionArray(),
+                    'label' => __('Enabled')
+                ],
+                1 => [
+                    'id' => MetaAds::XML_PATH_META_ADS_APPS_ID,
+                    'type' => 'text',
+                    'label' => __('Apps ID')
+                ],
+                2 => [
+                    'id' => MetaAds::XML_PATH_META_ADS_SECRET_ID,
+                    'type' => 'text',
+                    'label' => __('Secret ID')
+                ],
+                3 => [
+                    'id' => MetaAds::XML_PATH_META_ADS_ACCESS_TOKEN,
+                    'type' => 'text',
+                    'label' => __('Access Token')
+                ],
+            ]
+        ];
+
+        return $group;
+    }
+
 }
