@@ -32,13 +32,15 @@
     "autoload": {
         "files": [
             "src/banggalokal-googleads/registration.php",
-            "src/banggalokal-metaads/registration.php"
+            "src/banggalokal-metaads/registration.php",
+            "src/module-custom-configurable/registration.php"
         ],
         "psr-4": {
             "Google\\Ads\\GoogleAds\\": "src/googleads-lib/src",
             "GPBMetadata\\Google\\Ads\\GoogleAds\\": "src/googleads-lib/metadata",
             "Banggalokal\\Googleads\\": "src/banggalokal-googleads",
-            "Banggalokal\\Metaads\\": "src/banggalokal-metaads"
+            "Banggalokal\\Metaads\\": "src/banggalokal-metaads",
+            "Icube\\CustomConfigurable\\": "src/module-custom-configurable"
         }
     }
 }
